@@ -15,5 +15,5 @@ Open source software blog
         <a href="{{ post.url }}">{{ post.title }}</a> -
         <small>{{post.date | date : "%B %d, %Y" }}</small>
       </li>
-  {5 endfor %}
+  {% endfor %}
 </ul>
