@@ -2,6 +2,7 @@ title: Fossil Project
 description: Open source software blog
 theme: jekyll-theme-midnight
 url: "https://fossilproject.org"
+baseurl: "/fossilprojectblog"
 
 author: Benjamin Miller
 
