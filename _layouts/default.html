@@ -192,9 +192,7 @@
       <span>{{ pcomments | date: "%B %d, %Y" }}</span>
       {% if page.author %} &nbsp;·&nbsp; {{ page.author }}{% endif %}
     </div>
-    {% endif %}
     {{ content }}
-    {% if page.date %}
     <div class="comments-section">
     <script src="https://giscus.app/client.js"
         data-repo="FossilProject/FossilProjectBlog"
@@ -212,7 +210,7 @@
         async>
     </script>
     </div>
-    {& endif %}
+    {% endif %}
   </main>
 
   <footer>
