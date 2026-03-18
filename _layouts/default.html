@@ -193,6 +193,7 @@
       {% if page.author %} &nbsp;·&nbsp; {{ page.author }}{% endif %}
     </div>
     {{ content }}
+    {% endif }
     <div class="comments-section">
     <script src="https://giscus.app/client.js"
         data-repo="FossilProject/FossilProjectBlog"
@@ -210,7 +211,6 @@
         async>
     </script>
     </div>
-    {% endif %}
   </main>
 
   <footer>
