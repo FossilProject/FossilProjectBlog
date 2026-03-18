@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Introducing The Fossil Project"
 date: 2026-03-18
 author: S.K. Ooma
