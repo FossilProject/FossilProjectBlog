@@ -179,12 +179,23 @@
 <body>
 
   <header>
-    <a href="{{ '/' | relative_url }}" class="site-title">Fossil<span>Project</span></a>
-    <nav>
-      <a href="{{ '/posts/' | relative_url }}">Posts</a>
-      <a href="{{ '/about/' | relative_url }}">About</a>
-      <a href="{{ '/contact/' | relative_url }}">Contact</a>
-    </nav>
+  <div></div>
+  <a href="{{ '/' | relative_url }}" class="site-title">Fossil<span>Project</span></a>
+  <nav>
+    <a href="{{ '/about/' | relative_url }}">About</a>
+    <a href="{{ '/posts/' | relative_url }}">Posts</a>
+    <a href="{{ '/contact/' | relative_url }}">Contact</a>
+    {% if page.url != '/' %}
+    <form class="nav-search" action="/search" method="get">
+      <input
+        type="text"
+        name="q"
+        placeholder="Search..."
+        autocomplete="off">
+      <button type="submit">⌕</button>
+    </form>
+    {% endif %}
+  </nav>
   </header>
 
   <main>
