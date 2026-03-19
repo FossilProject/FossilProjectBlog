@@ -44,7 +44,6 @@ layout: null
       position: sticky;
       top: 0;
       z-index: 100;
-      gap: 1.5rem;
     }
 
     .site-title {
@@ -60,55 +59,10 @@ layout: null
 
     .site-title span { color: var(--amber); }
 
-    .nav-search {
-      flex: 1;
-      display: flex;
-      border: 1px solid var(--bg-border);
-      border-radius: 3px;
-      overflow: hidden;
-      transition: border-color 0.2s;
-      height: 36px;
-      min-width: 0;
-    }
-
-    .nav-search:focus-within { border-color: var(--amber); }
-
-    .nav-search input {
-      flex: 1;
-      background: var(--bg);
-      border: none;
-      padding: 0 1rem;
-      color: var(--text);
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 0.9rem;
-      outline: none;
-      min-width: 0;
-    }
-
-    .nav-search input::placeholder { color: #4a4540; }
-
-    .nav-search button {
-      background: var(--bg-raise);
-      border: none;
-      border-left: 1px solid var(--bg-border);
-      padding: 0 0.85rem;
-      color: var(--amber);
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
-
-    .nav-search button:hover {
-      background: var(--amber);
-      color: var(--bg);
-    }
-
     nav {
       display: flex;
       gap: 2rem;
       align-items: center;
-      flex-shrink: 0;
       margin-left: auto;
     }
 
@@ -356,10 +310,7 @@ layout: null
     footer a:hover { color: var(--amber); }
 
     @media (max-width: 600px) {
-      header {
-        padding: 0 1rem;
-        gap: 0.75rem;
-      }
+      header { padding: 0 1rem; }
       nav { gap: 1rem; }
       nav a { font-size: 0.8rem; }
     }
@@ -369,14 +320,6 @@ layout: null
 
   <header>
     <a href="/" class="site-title">Fossil<span>Project</span></a>
-    <form class="nav-search" onsubmit="handleNavSearch(event)">
-      <input
-        type="text"
-        id="nav-search-input"
-        placeholder="Search the web..."
-        autocomplete="off">
-      <button type="submit">⌕</button>
-    </form>
     <nav>
       <a href="/about/">About</a>
       <a href="/posts/">Posts</a>
@@ -436,7 +379,6 @@ layout: null
 
       if (q) {
         document.getElementById('search-input').value = q;
-        document.getElementById('nav-search-input').value = q;
         currentQuery = q;
         currentCategory = cat;
         setActiveFilter(cat);
@@ -444,22 +386,10 @@ layout: null
       }
     });
 
-    function handleNavSearch(event) {
-      event.preventDefault();
-      const query = document.getElementById('nav-search-input').value.trim();
-      if (!query) return;
-      document.getElementById('search-input').value = query;
-      currentQuery = query;
-      currentPage = 1;
-      updateURL(query, currentCategory, 1);
-      fetchResults(query, currentCategory, 1);
-    }
-
     function handleSearch(event) {
       event.preventDefault();
       const query = document.getElementById('search-input').value.trim();
       if (!query) return;
-      document.getElementById('nav-search-input').value = query;
       currentQuery = query;
       currentPage = 1;
       updateURL(query, currentCategory, 1);
