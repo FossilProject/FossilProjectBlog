@@ -1,0 +1,511 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search — Fossil Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amber: #e8821a;
+      --amber-dim: #a85d10;
+      --bg: #0e0d0b;
+      --bg-raise: #161410;
+      --bg-border: #2a2620;
+      --text: #c8c0b0;
+      --text-dim: #7a7060;
+      --text-bright: #f0ece4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: var(--bg-raise);
+      border-bottom: 1px solid var(--bg-border);
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .site-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--text-bright);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+
+    .site-title span { color: var(--amber); }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--amber); }
+
+    .search-bar-section {
+      background-color: var(--bg-raise);
+      border-bottom: 1px solid var(--bg-border);
+      padding: 1.25rem 2rem;
+    }
+
+    .search-form {
+      display: flex;
+      max-width: 740px;
+      margin: 0 auto;
+      border: 1px solid var(--bg-border);
+      border-radius: 3px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .search-form:focus-within { border-color: var(--amber); }
+
+    .search-input {
+      flex: 1;
+      background: var(--bg);
+      border: none;
+      padding: 0.75rem 1.25rem;
+      color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-input::placeholder { color: #4a4540; }
+
+    .search-btn {
+      background: var(--bg-raise);
+      border: none;
+      border-left: 1px solid var(--bg-border);
+      padding: 0.75rem 1.25rem;
+      color: var(--amber);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    .search-btn:hover {
+      background: var(--amber);
+      color: var(--bg);
+    }
+
+    .search-filters {
+      max-width: 740px;
+      margin: 0.75rem auto 0;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--bg-border);
+      color: var(--text-dim);
+      padding: 0.25rem 0.75rem;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    main {
+      max-width: 740px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .results-meta {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--bg-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .results-meta span { color: var(--amber); }
+
+    .result {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid #1e1c18;
+    }
+
+    .result:last-child { border-bottom: none; }
+
+    .result-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.15rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .result-title a {
+      color: var(--text-bright);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .result-title a:hover { color: var(--amber); }
+
+    .result-url {
+      font-size: 0.78rem;
+      color: var(--amber-dim);
+      margin-bottom: 0.4rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .result-snippet {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .result-engines {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 0.4rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 3rem 0;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .loading-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+      margin: 0 3px;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+
+    .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .error {
+      padding: 2rem;
+      background: var(--bg-raise);
+      border: 1px solid var(--bg-border);
+      border-radius: 3px;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    .no-query {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--text-dim);
+    }
+
+    .no-query p {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--bg-border);
+    }
+
+    .page-btn {
+      background: transparent;
+      border: 1px solid var(--bg-border);
+      color: var(--text-dim);
+      padding: 0.5rem 1rem;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .page-btn:hover,
+    .page-btn.active {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    .page-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    footer {
+      background-color: var(--bg-raise);
+      border-top: 1px solid var(--bg-border);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 5rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    footer a {
+      color: var(--amber-dim);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--amber); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div></div>
+    <a href="/" class="site-title">Fossil<span>Project</span></a>
+    <nav>
+      <a href="/about/">About</a>
+      <a href="/posts/">Posts</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <div class="search-bar-section">
+    <form class="search-form" onsubmit="handleSearch(event)">
+      <input
+        class="search-input"
+        type="text"
+        id="search-input"
+        placeholder="Search the web..."
+        autocomplete="off">
+      <button class="search-btn" type="submit">⌕</button>
+    </form>
+    <div class="search-filters">
+      <button class="filter-btn active" onclick="setCategory('general', this)">Web</button>
+      <button class="filter-btn" onclick="setCategory('news', this)">News</button>
+      <button class="filter-btn" onclick="setCategory('images', this)">Images</button>
+      <button class="filter-btn" onclick="setCategory('videos', this)">Videos</button>
+      <button class="filter-btn" onclick="setCategory('it', this)">Tech</button>
+    </div>
+  </div>
+
+  <main>
+    <div id="results-container">
+      <div class="no-query">
+        <p>Enter a search query above to get started.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      © {{ site.time | date: "%Y" }} Fossil Project
+      <span style="margin: 0 0.75rem; color: #2a2620;">|</span>
+      Written by S.K. Ooma
+      <span style="margin: 0 0.75rem; color: #2a2620;">|</span>
+      <a href="mailto:support@fossilproject.org">support@fossilproject.org</a>
+      <span style="margin: 0 0.75rem; color: #2a2620;">|</span>
+      Search powered by <a href="https://searxng.org" target="_blank">SearXNG</a>
+    </p>
+  </footer>
+
+  <script>
+    const SEARXNG_URL = 'https://search.fossilproject.org';
+    let currentCategory = 'general';
+    let currentPage = 1;
+    let currentQuery = '';
+
+    // parse query from URL on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q');
+      const cat = params.get('cat') || 'general';
+
+      if (q) {
+        document.getElementById('search-input').value = q;
+        currentQuery = q;
+        currentCategory = cat;
+        setActiveFilter(cat);
+        fetchResults(q, cat, 1);
+      }
+    });
+
+    function handleSearch(event) {
+      event.preventDefault();
+      const query = document.getElementById('search-input').value.trim();
+      if (!query) return;
+      currentQuery = query;
+      currentPage = 1;
+      updateURL(query, currentCategory, 1);
+      fetchResults(query, currentCategory, 1);
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (currentQuery) {
+        currentPage = 1;
+        updateURL(currentQuery, cat, 1);
+        fetchResults(currentQuery, cat, 1);
+      }
+    }
+
+    function setActiveFilter(cat) {
+      const map = { general: 0, news: 1, images: 2, videos: 3, it: 4 };
+      const btns = document.querySelectorAll('.filter-btn');
+      btns.forEach(b => b.classList.remove('active'));
+      if (map[cat] !== undefined) btns[map[cat]].classList.add('active');
+    }
+
+    function updateURL(query, cat, page) {
+      const url = new URL(window.location);
+      url.searchParams.set('q', query);
+      url.searchParams.set('cat', cat);
+      url.searchParams.set('p', page);
+      window.history.pushState({}, '', url);
+    }
+
+    async function fetchResults(query, category, page) {
+      const container = document.getElementById('results-container');
+      container.innerHTML = `
+        <div class="loading">
+          <span class="loading-dot"></span>
+          <span class="loading-dot"></span>
+          <span class="loading-dot"></span>
+        </div>`;
+
+      try {
+        const params = new URLSearchParams({
+          q: query,
+          categories: category,
+          pageno: page,
+          format: 'json'
+        });
+
+        const response = await fetch(`${SEARXNG_URL}/search?${params}`);
+
+        if (!response.ok) throw new Error('Search failed');
+
+        const data = await response.json();
+        renderResults(data, query, page);
+
+      } catch (err) {
+        container.innerHTML = `
+          <div class="error">
+            <p>Could not fetch results. The search engine may be temporarily unavailable.</p>
+            <p style="margin-top:0.5rem; font-size:0.85rem;">${err.message}</p>
+          </div>`;
+      }
+    }
+
+    function renderResults(data, query, page) {
+      const container = document.getElementById('results-container');
+
+      if (!data.results || data.results.length === 0) {
+        container.innerHTML = `
+          <div class="error">
+            <p>No results found for <strong>${query}</strong>.</p>
+            <p style="margin-top:0.5rem; font-size:0.85rem;">Try different keywords or a broader search.</p>
+          </div>`;
+        return;
+      }
+
+      const count = data.number_of_results
+        ? `About <span>${data.number_of_results.toLocaleString()}</span> results`
+        : `<span>${data.results.length}</span> results`;
+
+      let html = `<div class="results-meta"><span>${count}</span></div>`;
+
+      for (const result of data.results) {
+        const engines = result.engines
+          ? `<div class="result-engines">via ${result.engines.join(', ')}</div>`
+          : '';
+
+        const snippet = result.content
+          ? `<div class="result-snippet">${result.content}</div>`
+          : '';
+
+        html += `
+          <div class="result">
+            <div class="result-title">
+              <a href="${result.url}" target="_blank" rel="noopener">${result.title || result.url}</a>
+            </div>
+            <div class="result-url">${result.url}</div>
+            ${snippet}
+            ${engines}
+          </div>`;
+      }
+
+      // pagination
+      html += `
+        <div class="pagination">
+          <button class="page-btn" onclick="goToPage(${page - 1})" ${page <= 1 ? 'disabled' : ''}>← Prev</button>
+          <button class="page-btn active">${page}</button>
+          <button class="page-btn" onclick="goToPage(${page + 1})">Next →</button>
+        </div>`;
+
+      container.innerHTML = html;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToPage(page) {
+      if (page < 1) return;
+      currentPage = page;
+      updateURL(currentQuery, currentCategory, page);
+      fetchResults(currentQuery, currentCategory, page);
+    }
+  </script>
+
+</body>
+</html>
