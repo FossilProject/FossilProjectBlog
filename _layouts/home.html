@@ -1,14 +1,13 @@
 ---
 layout: default
 ---
-
 <style>
   .hero {
     background: linear-gradient(135deg, #1a1508 0%, #0e0d0b 60%);
     border: 1px solid #2a2620;
     border-radius: 4px;
     padding: 3.5rem 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     position: relative;
     overflow: hidden;
   }
@@ -38,6 +37,54 @@ layout: default
     margin-bottom: 0;
   }
 
+  .search-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .search-form {
+    display: flex;
+    gap: 0;
+    border: 1px solid #2a2620;
+    border-radius: 3px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .search-form:focus-within {
+    border-color: #e8821a;
+  }
+
+  .search-input {
+    flex: 1;
+    background: #161410;
+    border: none;
+    padding: 0.85rem 1.25rem;
+    color: #c8c0b0;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .search-input::placeholder {
+    color: #4a4540;
+  }
+
+  .search-btn {
+    background: #1a1508;
+    border: none;
+    border-left: 1px solid #2a2620;
+    padding: 0.85rem 1.25rem;
+    color: #e8821a;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+  }
+
+  .search-btn:hover {
+    background: #e8821a;
+    color: #0e0d0b;
+  }
+
   .posts-header {
     font-family: 'Source Serif 4', serif;
     font-size: 0.8rem;
@@ -47,6 +94,9 @@ layout: default
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid #2a2620;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .post-list {
@@ -85,11 +135,98 @@ layout: default
     white-space: nowrap;
     letter-spacing: 0.04em;
   }
+
+  .news-section {
+    margin-top: 3rem;
+  }
+
+  .news-source-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .news-tab {
+    background: transparent;
+    border: 1px solid #2a2620;
+    color: #7a7060;
+    padding: 0.3rem 0.9rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .news-tab:hover,
+  .news-tab.active {
+    border-color: #e8821a;
+    color: #e8821a;
+  }
+
+  .news-list {
+    list-style: none;
+  }
+
+  .news-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #1e1c18;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .news-list li:last-child {
+    border-bottom: none;
+  }
+
+  .news-list a {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    color: #f0ece4;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .news-list a:hover {
+    color: #e8821a;
+  }
+
+  .news-meta {
+    font-size: 0.78rem;
+    color: #7a7060;
+    letter-spacing: 0.03em;
+  }
+
+  .news-meta span {
+    color: #a85d10;
+  }
+
+  .news-loading {
+    color: #7a7060;
+    font-size: 0.9rem;
+    padding: 1rem 0;
+  }
 </style>
 
 <div class="hero">
   <h1>Fossil<span>Project</span></h1>
   <p>Covering open source software that deserves more attention — from game development tools to the broader FOSS ecosystem.</p>
+</div>
+
+<div class="search-section">
+  <form class="search-form" action="https://duckduckgo.com/" method="get" target="_blank">
+    <input
+      class="search-input"
+      type="text"
+      name="q"
+      placeholder="Search the web..."
+      autocomplete="off">
+    <button class="search-btn" type="submit">⌕</button>
+  </form>
 </div>
 
 <p class="posts-header">Latest Posts</p>
@@ -102,5 +239,75 @@ layout: default
     </li>
   {% endfor %}
 </ul>
+
+<div class="news-section">
+  <p class="posts-header">
+    <span>FOSS News</span>
+    <span id="news-updated" style="font-size:0.75rem;"></span>
+  </p>
+
+  <div class="news-source-tabs">
+    <button class="news-tab active" onclick="loadFeed('phoronix', event)">Phoronix</button>
+    <button class="news-tab" onclick="loadFeed('lwn', event)">LWN</button>
+    <button class="news-tab" onclick="loadFeed('omgubuntu', event)">OMG Ubuntu</button>
+    <button class="news-tab" onclick="loadFeed('fosspost', event)">FOSS Post</button>
+  </div>
+
+  <ul class="news-list" id="news-list">
+    <li class="news-loading">Loading feed...</li>
+  </ul>
+</div>
+
+<script>
+  const feeds = {
+    phoronix: { url: 'https://www.phoronix.com/rss.php', name: 'Phoronix' },
+    lwn: { url: 'https://lwn.net/headlines/rss', name: 'LWN.net' },
+    omgubuntu: { url: 'https://www.omgubuntu.co.uk/feed', name: 'OMG Ubuntu' },
+    fosspost: { url: 'https://fosspost.org/feed', name: 'FOSS Post' }
+  };
+
+  async function loadFeed(sourceKey, event) {
+    document.querySelectorAll('.news-tab').forEach(t => t.classList.remove('active'));
+    if (event) event.target.classList.add('active');
+
+    const list = document.getElementById('news-list');
+    list.innerHTML = '<li class="news-loading">Loading feed...</li>';
+
+    const source = feeds[sourceKey];
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}&count=10`;
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (data.status !== 'ok' || !data.items.length) {
+        list.innerHTML = '<li class="news-loading">Could not load feed.</li>';
+        return;
+      }
+
+      list.innerHTML = data.items.map(item => {
+        const date = new Date(item.pubDate).toLocaleDateString('en-US', {
+          month: 'short', day: 'numeric', year: 'numeric'
+        });
+        return `
+          <li>
+            <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+            <span class="news-meta"><span>${source.name}</span> &nbsp;·&nbsp; ${date}</span>
+          </li>
+        `;
+      }).join('');
+
+      document.getElementById('news-updated').textContent =
+        'Updated ' + new Date().toLocaleTimeString();
+
+    } catch (err) {
+      list.innerHTML = '<li class="news-loading">Failed to load feed. Try again later.</li>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadFeed('phoronix', null);
+  });
+</script>
 
 {{ content }}
