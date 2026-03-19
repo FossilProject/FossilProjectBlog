@@ -190,7 +190,7 @@
   <main>
     {% if page.date %}
     <div class="post-meta">
-      <span>{{ pcomments | date: "%B %d, %Y" }}</span>
+     <span>{{ page.date | date: "%B %d, %Y" }}</span>
       {% if page.author %} &nbsp;·&nbsp; {{ page.author }}{% endif %}
     </div>
     {% endif %}
