@@ -4,8 +4,9 @@ title: "Introducing The Fossil Project"
 date: 2026-03-18
 author: S.K. Ooma
 ---
+# Introducing The Fossil Project
 
-# Hello World! 
+## Hello World! 
 
 The above phrase carries a lot of weight in the programming world, it's the first thing most developers ever make a computer say. It feels fitting then that it's also how The Fossil Project begins, because this blog is in many ways about beginnings. The beginning of a movement, the beginning of a conversation, and for many readers hopefully the beginning of a shift in how they think about the software they use every day.
 
@@ -57,7 +58,7 @@ That shift can feel uncomfortable at first. Unfamiliarity is uncomfortable. But 
 
 ## What's Coming
 
-The Fossil Project will try to publish weekly. The coverage here will not be limited to any one category of software or any one type of user. Whether you are a developer, a creative, or simply someone who uses a computer and has started asking questions about the tools you depend on, there will be something here for you.
+The Fossil Project will try to publish weekly at the minimum. The coverage here will not be limited to any one category of software or any one type of user. Whether you are a developer, a creative, or simply someone who uses a computer and has started asking questions about the tools you depend on, there will be something here for you.
 
 Upcoming posts will cover a range of FOSS projects across different disciplines, from game development tools to productivity software to the broader Linux ecosystem. The goal is not to be an exhaustive encyclopedia but to be a honest, practical voice pointing toward things worth your attention.
 
