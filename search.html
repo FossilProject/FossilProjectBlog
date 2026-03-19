@@ -21,9 +21,7 @@ layout: null
       --text-dim: #7a7060;
       --text-bright: #f0ece4;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background-color: var(--bg);
       color: var(--text);
@@ -33,7 +31,6 @@ layout: null
       line-height: 1.8;
       min-height: 100vh;
     }
-
     header {
       background-color: var(--bg-raise);
       border-bottom: 1px solid var(--bg-border);
@@ -45,7 +42,6 @@ layout: null
       top: 0;
       z-index: 100;
     }
-
     .site-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 900;
@@ -56,16 +52,13 @@ layout: null
       white-space: nowrap;
       flex-shrink: 0;
     }
-
     .site-title span { color: var(--amber); }
-
     nav {
       display: flex;
       gap: 2rem;
       align-items: center;
       margin-left: auto;
     }
-
     nav a {
       color: var(--text-dim);
       text-decoration: none;
@@ -75,15 +68,12 @@ layout: null
       transition: color 0.2s;
       white-space: nowrap;
     }
-
     nav a:hover { color: var(--amber); }
-
     .search-bar-section {
       background-color: var(--bg-raise);
       border-bottom: 1px solid var(--bg-border);
       padding: 1.25rem 2rem;
     }
-
     .search-form {
       display: flex;
       max-width: 740px;
@@ -93,9 +83,7 @@ layout: null
       overflow: hidden;
       transition: border-color 0.2s;
     }
-
     .search-form:focus-within { border-color: var(--amber); }
-
     .search-input {
       flex: 1;
       background: var(--bg);
@@ -106,9 +94,7 @@ layout: null
       font-size: 1rem;
       outline: none;
     }
-
     .search-input::placeholder { color: #4a4540; }
-
     .search-btn {
       background: var(--bg-raise);
       border: none;
@@ -119,12 +105,10 @@ layout: null
       font-size: 1rem;
       transition: background 0.2s;
     }
-
     .search-btn:hover {
       background: var(--amber);
       color: var(--bg);
     }
-
     .search-filters {
       max-width: 740px;
       margin: 0.75rem auto 0;
@@ -132,7 +116,6 @@ layout: null
       gap: 0.5rem;
       flex-wrap: wrap;
     }
-
     .filter-btn {
       background: transparent;
       border: 1px solid var(--bg-border);
@@ -146,19 +129,19 @@ layout: null
       border-radius: 2px;
       transition: all 0.2s;
     }
-
     .filter-btn:hover,
     .filter-btn.active {
       border-color: var(--amber);
       color: var(--amber);
     }
-
     main {
       max-width: 740px;
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
-
+    main.image-mode {
+      max-width: 1200px;
+    }
     .results-meta {
       font-size: 0.8rem;
       color: var(--text-dim);
@@ -170,30 +153,23 @@ layout: null
       justify-content: space-between;
       align-items: center;
     }
-
     .results-meta span { color: var(--amber); }
-
     .result {
       padding: 1.25rem 0;
       border-bottom: 1px solid #1e1c18;
     }
-
     .result:last-child { border-bottom: none; }
-
     .result-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.15rem;
       margin-bottom: 0.25rem;
     }
-
     .result-title a {
       color: var(--text-bright);
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .result-title a:hover { color: var(--amber); }
-
     .result-url {
       font-size: 0.78rem;
       color: var(--amber-dim);
@@ -202,17 +178,88 @@ layout: null
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
     .result-snippet {
       font-size: 0.9rem;
       color: var(--text);
       line-height: 1.6;
     }
-
     .result-engines {
       font-size: 0.75rem;
       color: var(--text-dim);
       margin-top: 0.4rem;
+    }
+
+    /* IMAGE RESULTS */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .result-image {
+      border: 1px solid var(--bg-border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .result-image a {
+      display: block;
+      text-decoration: none;
+    }
+    .result-image img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    .result-image img:hover { opacity: 0.85; }
+    .image-caption {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background: var(--bg-raise);
+    }
+
+    /* VIDEO RESULTS */
+    .video-result {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      text-decoration: none !important;
+    }
+    .video-result:hover .video-title { color: var(--amber); }
+    .video-thumb-wrap {
+      position: relative;
+      flex-shrink: 0;
+      width: 168px;
+    }
+    .video-thumb-wrap img {
+      width: 168px;
+      height: 94px;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+    }
+    .video-duration {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 1px 4px;
+      border-radius: 2px;
+    }
+    .video-info { flex: 1; min-width: 0; }
+    .video-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      color: var(--text-bright);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
     }
 
     .loading {
@@ -221,7 +268,6 @@ layout: null
       color: var(--text-dim);
       font-size: 0.9rem;
     }
-
     .loading-dot {
       display: inline-block;
       width: 6px;
@@ -231,15 +277,12 @@ layout: null
       margin: 0 3px;
       animation: pulse 1.2s ease-in-out infinite;
     }
-
     .loading-dot:nth-child(2) { animation-delay: 0.2s; }
     .loading-dot:nth-child(3) { animation-delay: 0.4s; }
-
     @keyframes pulse {
       0%, 100% { opacity: 0.3; transform: scale(0.8); }
       50% { opacity: 1; transform: scale(1.2); }
     }
-
     .error {
       padding: 2rem;
       background: var(--bg-raise);
@@ -248,18 +291,15 @@ layout: null
       color: var(--text-dim);
       text-align: center;
     }
-
     .no-query {
       text-align: center;
       padding: 4rem 0;
       color: var(--text-dim);
     }
-
     .no-query p {
       font-size: 0.9rem;
       margin-top: 0.5rem;
     }
-
     .pagination {
       display: flex;
       justify-content: center;
@@ -268,7 +308,6 @@ layout: null
       padding-top: 1.5rem;
       border-top: 1px solid var(--bg-border);
     }
-
     .page-btn {
       background: transparent;
       border: 1px solid var(--bg-border);
@@ -280,18 +319,15 @@ layout: null
       border-radius: 2px;
       transition: all 0.2s;
     }
-
     .page-btn:hover,
     .page-btn.active {
       border-color: var(--amber);
       color: var(--amber);
     }
-
     .page-btn:disabled {
       opacity: 0.3;
       cursor: not-allowed;
     }
-
     footer {
       background-color: var(--bg-raise);
       border-top: 1px solid var(--bg-border);
@@ -301,23 +337,22 @@ layout: null
       font-size: 0.85rem;
       color: var(--text-dim);
     }
-
     footer a {
       color: var(--amber-dim);
       text-decoration: none;
     }
-
     footer a:hover { color: var(--amber); }
-
     @media (max-width: 600px) {
       header { padding: 0 1rem; }
       nav { gap: 1rem; }
       nav a { font-size: 0.8rem; }
+      .video-thumb-wrap { width: 120px; }
+      .video-thumb-wrap img { width: 120px; height: 68px; }
+      .image-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
     }
   </style>
 </head>
 <body>
-
   <header>
     <a href="/" class="site-title">Fossil<span>Project</span></a>
     <nav>
@@ -326,7 +361,6 @@ layout: null
       <a href="/contact/">Contact</a>
     </nav>
   </header>
-
   <div class="search-bar-section">
     <form class="search-form" onsubmit="handleSearch(event)">
       <input
@@ -345,15 +379,13 @@ layout: null
       <button class="filter-btn" onclick="setCategory('it', this)">Tech</button>
     </div>
   </div>
-
-  <main>
+  <main id="main-content">
     <div id="results-container">
       <div class="no-query">
         <p>Enter a search query above to get started.</p>
       </div>
     </div>
   </main>
-
   <footer>
     <p>
       © 2026 Fossil Project
@@ -361,11 +393,8 @@ layout: null
       Written by S.K. Ooma
       <span style="margin: 0 0.75rem; color: #2a2620;">|</span>
       <a href="mailto:support@fossilproject.org">support@fossilproject.org</a>
-      <span style="margin: 0 0.75rem; color: #2a2620;">|</span>
-      Search powered by <a href="https://searxng.org" target="_blank">SearXNG</a>
     </p>
   </footer>
-
   <script>
     const SEARXNG_URL = 'https://search.fossilproject.org';
     let currentCategory = 'general';
@@ -376,7 +405,6 @@ layout: null
       const params = new URLSearchParams(window.location.search);
       const q = params.get('q');
       const cat = params.get('cat') || 'general';
-
       if (q) {
         document.getElementById('search-input').value = q;
         currentQuery = q;
@@ -400,6 +428,8 @@ layout: null
       currentCategory = cat;
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      const main = document.getElementById('main-content');
+      main.classList.toggle('image-mode', cat === 'images');
       if (currentQuery) {
         currentPage = 1;
         updateURL(currentQuery, cat, 1);
@@ -412,6 +442,8 @@ layout: null
       const btns = document.querySelectorAll('.filter-btn');
       btns.forEach(b => b.classList.remove('active'));
       if (map[cat] !== undefined) btns[map[cat]].classList.add('active');
+      const main = document.getElementById('main-content');
+      main.classList.toggle('image-mode', cat === 'images');
     }
 
     function updateURL(query, cat, page) {
@@ -430,7 +462,6 @@ layout: null
           <span class="loading-dot"></span>
           <span class="loading-dot"></span>
         </div>`;
-
       try {
         const params = new URLSearchParams({
           q: query,
@@ -438,12 +469,10 @@ layout: null
           pageno: page,
           format: 'json'
         });
-
         const response = await fetch(`${SEARXNG_URL}/search?${params}`);
         if (!response.ok) throw new Error('Search failed');
         const data = await response.json();
         renderResults(data, query, page);
-
       } catch (err) {
         container.innerHTML = `
           <div class="error">
@@ -455,7 +484,6 @@ layout: null
 
     function renderResults(data, query, page) {
       const container = document.getElementById('results-container');
-
       if (!data.results || data.results.length === 0) {
         container.innerHTML = `
           <div class="error">
@@ -469,36 +497,87 @@ layout: null
         ? `About <span>${data.number_of_results.toLocaleString()}</span> results`
         : `<span>${data.results.length}</span> results`;
 
-      let html = `<div class="results-meta"><span>${count}</span></div>`;
-
-      for (const result of data.results) {
-        const engines = result.engines
-          ? `<div class="result-engines">via ${result.engines.join(', ')}</div>`
-          : '';
-
-        const snippet = result.content
-          ? `<div class="result-snippet">${result.content}</div>`
-          : '';
-
-        html += `
-          <div class="result">
-            <div class="result-title">
-              <a href="${result.url}" target="_blank" rel="noopener">${result.title || result.url}</a>
-            </div>
-            <div class="result-url">${result.url}</div>
-            ${snippet}
-            ${engines}
-          </div>`;
-      }
-
-      html += `
+      const metaHtml = `<div class="results-meta"><span>${count}</span></div>`;
+      const paginationHtml = `
         <div class="pagination">
           <button class="page-btn" onclick="goToPage(${page - 1})" ${page <= 1 ? 'disabled' : ''}>← Prev</button>
           <button class="page-btn active">${page}</button>
           <button class="page-btn" onclick="goToPage(${page + 1})">Next →</button>
         </div>`;
 
-      container.innerHTML = html;
+      if (currentCategory === 'images') {
+        let gridHtml = '<div class="image-grid">';
+        for (const result of data.results) {
+          const imgSrc = result.img_src || result.thumbnail_src || '';
+          if (!imgSrc) continue;
+          gridHtml += `
+            <div class="result-image">
+              <a href="${result.url}" target="_blank" rel="noopener">
+                <img src="${imgSrc}" alt="${result.title || ''}" loading="lazy"
+                  onerror="this.closest('.result-image').style.display='none'">
+                <div class="image-caption">${result.title || ''}</div>
+              </a>
+            </div>`;
+        }
+        gridHtml += '</div>';
+        container.innerHTML = metaHtml + gridHtml + paginationHtml;
+
+      } else if (currentCategory === 'videos') {
+        let html = metaHtml;
+        for (const result of data.results) {
+          const thumb = result.thumbnail || result.img_src || '';
+          const duration = result.length
+            ? `<span class="video-duration">${result.length}</span>`
+            : '';
+          const thumbHtml = thumb
+            ? `<div class="video-thumb-wrap">
+                ${duration}
+                <img src="${thumb}" alt="${result.title || ''}" loading="lazy"
+                  onerror="this.parentElement.style.display='none'">
+               </div>`
+            : '';
+          const engines = result.engines
+            ? `<div class="result-engines">via ${result.engines.join(', ')}</div>`
+            : '';
+          html += `
+            <div class="result">
+              <a href="${result.url}" target="_blank" rel="noopener" class="video-result">
+                ${thumbHtml}
+                <div class="video-info">
+                  <div class="video-title">${result.title || result.url}</div>
+                  <div class="result-url">${result.url}</div>
+                  ${result.content ? `<div class="result-snippet">${result.content}</div>` : ''}
+                  ${engines}
+                </div>
+              </a>
+            </div>`;
+        }
+        html += paginationHtml;
+        container.innerHTML = html;
+
+      } else {
+        let html = metaHtml;
+        for (const result of data.results) {
+          const engines = result.engines
+            ? `<div class="result-engines">via ${result.engines.join(', ')}</div>`
+            : '';
+          const snippet = result.content
+            ? `<div class="result-snippet">${result.content}</div>`
+            : '';
+          html += `
+            <div class="result">
+              <div class="result-title">
+                <a href="${result.url}" target="_blank" rel="noopener">${result.title || result.url}</a>
+              </div>
+              <div class="result-url">${result.url}</div>
+              ${snippet}
+              ${engines}
+            </div>`;
+        }
+        html += paginationHtml;
+        container.innerHTML = html;
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -509,6 +588,5 @@ layout: null
       fetchResults(currentQuery, currentCategory, page);
     }
   </script>
-
 </body>
 </html>
