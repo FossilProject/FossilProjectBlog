@@ -188,8 +188,6 @@ layout: null
       color: var(--text-dim);
       margin-top: 0.4rem;
     }
-
-    /* IMAGE RESULTS */
     .image-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -222,8 +220,6 @@ layout: null
       text-overflow: ellipsis;
       background: var(--bg-raise);
     }
-
-    /* VIDEO RESULTS */
     .video-result {
       display: flex;
       gap: 1rem;
@@ -261,7 +257,6 @@ layout: null
       margin-bottom: 0.25rem;
       transition: color 0.2s;
     }
-
     .loading {
       text-align: center;
       padding: 3rem 0;
@@ -342,6 +337,14 @@ layout: null
       text-decoration: none;
     }
     footer a:hover { color: var(--amber); }
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+    }
+    .footer-divider { color: #2a2620; }
     @media (max-width: 600px) {
       header { padding: 0 1rem; }
       nav { gap: 1rem; }
@@ -387,16 +390,15 @@ layout: null
     </div>
   </main>
   <footer>
-    <p>
-      © {{ site.time | date: "%Y" }} {{ site.title }}
+    <div class="footer-row">
+      <span>© 2026 Fossil Project</span>
       <span class="footer-divider">|</span>
-      Written by {{ site.author }}
+      <span>Written by S.K. Ooma</span>
       <span class="footer-divider">|</span>
       <a href="mailto:support@fossilproject.org">support@fossilproject.org</a>
-    </p>
-    <div style="margin-top: 1rem;">
+      <span class="footer-divider">|</span>
       <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-      <script type='text/javascript'>kofiwidget2.init('Support us on Ko-fi', '#e8821a', 'S6S81WDKX3');kofiwidget2.draw();</script>
+      <script type='text/javascript'>kofiwidget2.init('Support us on Ko-fi', '#7a4010', 'S6S81WDKX3');kofiwidget2.draw();</script>
     </div>
   </footer>
   <script>
