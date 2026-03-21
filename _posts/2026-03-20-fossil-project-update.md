@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Fossil Project Update — What's New and Where We're Going"
-date: 2026-03-21
+date: 2026-03-20
 author: S.K. Ooma
 ---
 # Fossil Project Update - What's New and Where we're Going
