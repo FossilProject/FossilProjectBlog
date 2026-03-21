@@ -4,7 +4,7 @@ title: "Fossil Project Update — What's New and Where We're Going"
 date: 2026-03-21
 author: S.K. Ooma
 ---
-# Fossil Project Update
+# Fossil Project Update - What's New and Where we're Going
 
 When I launched Fossil Project earlier this week with a single introductory post, the site was little more than a blog with a mission statement. A lot has changed since then, and I wanted to take a moment to document what's been built, why it was built, and where this project is headed.
 
