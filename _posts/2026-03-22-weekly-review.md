@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "FOSS Weekly Recap - Week of MArch 17, 2026"
+title: "FOSS Weekly Recap - Week of March 17, 2026"
 date: 2026-03-22
 author: S.K. Ooma
 ---
