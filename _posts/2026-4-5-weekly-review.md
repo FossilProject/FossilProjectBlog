@@ -1,10 +1,11 @@
 ---
-layout: post
-title: "Back at It (Sort Of) | FOSS News Weekly Roundup"
+layout: default
+title: "Back at It (Sort Of) | FOSS News Weekly Recap"
 date: 2026-04-05
 author: S.K. Ooma
 tags: [foss, news, anthropic, github, fyrox, rust, nasa, onlyoffice, nextcloud, manjaro, linux]
 ---
+# FOSS Weekly Recap — Week of April 1st
  
 Hey everyone. I owe you an explanation before we get into it, because I know it has been quiet around here lately. Finals week hit hard, and on top of that I started a new job that had me bouncing across several states this past week. Between the studying, the traveling, the onboarding, and the general chaos that comes with doing all three at once, writing just was not in the cards. But I am back, mostly in one piece, and there is a lot to catch up on. This was genuinely one of the busiest weeks in FOSS-adjacent news in recent memory, so let's get into it.
  
@@ -86,7 +87,7 @@ No fork has launched yet. But the contributors behind the manifesto seem serious
  
 ---
  
-That is the roundup. Wild week to come back to. More soon.
+That is the recap. Wild week to come back to. More soon.
  
 -- S.K. Ooma
  
