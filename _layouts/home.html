@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <style>
   .hero {
     background: linear-gradient(135deg, #1a1508 0%, #0e0d0b 60%);
@@ -34,7 +35,31 @@ layout: default
     font-size: 1.1rem;
     color: #a09080;
     max-width: 520px;
-    margin-bottom: 0;
+  }
+
+  /* =========================
+     NEXTCLOUD BUTTON STYLE
+     ========================= */
+  .nav-cloud-btn {
+    display: inline-block;
+    border: 1px solid #2a2620;
+    background: #1a1508;
+    color: #e8821a;
+    padding: 0.45rem 0.9rem;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    margin-top: 1rem;
+  }
+
+  .nav-cloud-btn:hover {
+    background: #e8821a;
+    color: #0e0d0b;
+    border-color: #e8821a;
   }
 
   .search-section {
@@ -43,11 +68,9 @@ layout: default
 
   .search-form {
     display: flex;
-    gap: 0;
     border: 1px solid #2a2620;
     border-radius: 3px;
     overflow: hidden;
-    transition: border-color 0.2s;
   }
 
   .search-form:focus-within {
@@ -126,7 +149,6 @@ layout: default
 
   .post-list a:hover {
     color: #e8821a;
-    text-decoration: none;
   }
 
   .post-list .post-date {
@@ -215,16 +237,17 @@ layout: default
 <div class="hero">
   <h1>Fossil<span>Project</span></h1>
   <p>A hub for open source discovery, news, and the developers building a freer web.</p>
+
+  <a href="https://cloud.fossilproject.org"
+     class="nav-cloud-btn">
+     Open Cloud →
+  </a>
 </div>
 
 <div class="search-section">
   <form class="search-form" action="/search" method="get">
-    <input
-      class="search-input"
-      type="text"
-      name="q"
-      placeholder="Search the web..."
-      autocomplete="off">
+    <input class="search-input" type="text" name="q"
+      placeholder="Search the web..." autocomplete="off">
     <button class="search-btn" type="submit">⌕</button>
   </form>
 </div>
@@ -232,12 +255,14 @@ layout: default
 <p class="posts-header">Latest Posts</p>
 
 <ul class="post-list">
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
-    </li>
-  {% endfor %}
+{% raw %}
+{% for post in site.posts %}
+<li>
+<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+<span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+</li>
+{% endfor %}
+{% endraw %}
 </ul>
 
 <div class="news-section">
@@ -259,55 +284,48 @@ layout: default
 </div>
 
 <script>
-  const feeds = {
-    phoronix: { url: 'https://www.phoronix.com/rss.php', name: 'Phoronix' },
-    lwn: { url: 'https://lwn.net/headlines/rss', name: 'LWN.net' },
-    omgubuntu: { url: 'https://www.omgubuntu.co.uk/feed', name: 'OMG Ubuntu' },
-    fosspost: { url: 'https://fosspost.org/feed', name: 'FOSS Post' }
-  };
+const feeds = {
+  phoronix:{url:'https://www.phoronix.com/rss.php',name:'Phoronix'},
+  lwn:{url:'https://lwn.net/headlines/rss',name:'LWN.net'},
+  omgubuntu:{url:'https://www.omgubuntu.co.uk/feed',name:'OMG Ubuntu'},
+  fosspost:{url:'https://fosspost.org/feed',name:'FOSS Post'}
+};
 
-  async function loadFeed(sourceKey, event) {
-    document.querySelectorAll('.news-tab').forEach(t => t.classList.remove('active'));
-    if (event) event.target.classList.add('active');
+async function loadFeed(sourceKey,event){
+document.querySelectorAll('.news-tab').forEach(t=>t.classList.remove('active'));
+if(event)event.target.classList.add('active');
 
-    const list = document.getElementById('news-list');
-    list.innerHTML = '<li class="news-loading">Loading feed...</li>';
+const list=document.getElementById('news-list');
+list.innerHTML='<li class="news-loading">Loading feed...</li>';
 
-    const source = feeds[sourceKey];
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}&count=10`;
+const source=feeds[sourceKey];
+const apiUrl=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}&count=10`;
 
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
+try{
+const response=await fetch(apiUrl);
+const data=await response.json();
 
-      if (data.status !== 'ok' || !data.items.length) {
-        list.innerHTML = '<li class="news-loading">Could not load feed.</li>';
-        return;
-      }
+if(data.status!=='ok'||!data.items.length){
+list.innerHTML='<li class="news-loading">Could not load feed.</li>';
+return;
+}
 
-      list.innerHTML = data.items.map(item => {
-        const date = new Date(item.pubDate).toLocaleDateString('en-US', {
-          month: 'short', day: 'numeric', year: 'numeric'
-        });
-        return `
-          <li>
-            <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
-            <span class="news-meta"><span>${source.name}</span> &nbsp;·&nbsp; ${date}</span>
-          </li>
-        `;
-      }).join('');
+list.innerHTML=data.items.map(item=>{
+const date=new Date(item.pubDate).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+return `
+<li>
+<a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+<span class="news-meta"><span>${source.name}</span> · ${date}</span>
+</li>`;
+}).join('');
 
-      document.getElementById('news-updated').textContent =
-        'Updated ' + new Date().toLocaleTimeString();
+document.getElementById('news-updated').textContent='Updated '+new Date().toLocaleTimeString();
+}catch(err){
+list.innerHTML='<li class="news-loading">Failed to load feed.</li>';
+}
+}
 
-    } catch (err) {
-      list.innerHTML = '<li class="news-loading">Failed to load feed. Try again later.</li>';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    loadFeed('phoronix', null);
-  });
+document.addEventListener('DOMContentLoaded',()=>loadFeed('phoronix',null));
 </script>
 
 {{ content }}
