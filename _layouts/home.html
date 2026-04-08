@@ -27,7 +27,9 @@ layout: default
     color: #f0ece4;
   }
 
-  .hero h1 span { color: #e8821a; }
+  .hero h1 span {
+    color: #e8821a;
+  }
 
   .hero p {
     font-size: 1.1rem;
@@ -35,7 +37,34 @@ layout: default
     max-width: 520px;
   }
 
-  .search-section { margin-bottom: 2.5rem; }
+  /* =========================
+     NEXTCLOUD BUTTON STYLE
+     ========================= */
+  .nav-cloud-btn {
+    display: inline-block;
+    border: 1px solid #2a2620;
+    background: #1a1508;
+    color: #e8821a;
+    padding: 0.45rem 0.9rem;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    margin-top: 1rem;
+  }
+
+  .nav-cloud-btn:hover {
+    background: #e8821a;
+    color: #0e0d0b;
+    border-color: #e8821a;
+  }
+
+  .search-section {
+    margin-bottom: 2.5rem;
+  }
 
   .search-form {
     display: flex;
@@ -44,73 +73,175 @@ layout: default
     overflow: hidden;
   }
 
-  .search-form:focus-within { border-color:#e8821a; }
-
-  .search-input {
-    flex:1;
-    background:#161410;
-    border:none;
-    padding:.85rem 1.25rem;
-    color:#c8c0b0;
-    font-family:'Source Serif 4', Georgia, serif;
-    font-size:1rem;
-    outline:none;
+  .search-form:focus-within {
+    border-color: #e8821a;
   }
 
-  .search-input::placeholder { color:#4a4540; }
+  .search-input {
+    flex: 1;
+    background: #161410;
+    border: none;
+    padding: 0.85rem 1.25rem;
+    color: #c8c0b0;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .search-input::placeholder {
+    color: #4a4540;
+  }
 
   .search-btn {
-    background:#1a1508;
-    border:none;
-    border-left:1px solid #2a2620;
-    padding:.85rem 1.25rem;
-    color:#e8821a;
-    cursor:pointer;
+    background: #1a1508;
+    border: none;
+    border-left: 1px solid #2a2620;
+    padding: 0.85rem 1.25rem;
+    color: #e8821a;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
   }
 
   .search-btn:hover {
-    background:#e8821a;
-    color:#0e0d0b;
+    background: #e8821a;
+    color: #0e0d0b;
   }
 
   .posts-header {
-    font-family:'Source Serif 4',serif;
-    font-size:.8rem;
-    text-transform:uppercase;
-    letter-spacing:.12em;
-    color:#7a7060;
-    margin-bottom:1.5rem;
-    padding-bottom:.75rem;
-    border-bottom:1px solid #2a2620;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #7a7060;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #2a2620;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .post-list { list-style:none; }
+  .post-list {
+    list-style: none;
+  }
 
   .post-list li {
-    padding:1.25rem 0;
-    border-bottom:1px solid #1e1c18;
-    display:flex;
-    justify-content:space-between;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #1e1c18;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .post-list li:last-child {
+    border-bottom: none;
   }
 
   .post-list a {
-    font-family:'Playfair Display',Georgia,serif;
-    font-size:1.1rem;
-    color:#f0ece4;
-    text-decoration:none;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: #f0ece4;
+    text-decoration: none;
+    transition: color 0.2s;
   }
 
-  .post-list a:hover { color:#e8821a; }
+  .post-list a:hover {
+    color: #e8821a;
+  }
 
-  .post-date {
-    font-size:.8rem;
-    color:#7a7060;
+  .post-list .post-date {
+    font-size: 0.8rem;
+    color: #7a7060;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .news-section {
+    margin-top: 3rem;
+  }
+
+  .news-source-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .news-tab {
+    background: transparent;
+    border: 1px solid #2a2620;
+    color: #7a7060;
+    padding: 0.3rem 0.9rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .news-tab:hover,
+  .news-tab.active {
+    border-color: #e8821a;
+    color: #e8821a;
+  }
+
+  .news-list {
+    list-style: none;
+  }
+
+  .news-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #1e1c18;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .news-list li:last-child {
+    border-bottom: none;
+  }
+
+  .news-list a {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    color: #f0ece4;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .news-list a:hover {
+    color: #e8821a;
+  }
+
+  .news-meta {
+    font-size: 0.78rem;
+    color: #7a7060;
+    letter-spacing: 0.03em;
+  }
+
+  .news-meta span {
+    color: #a85d10;
+  }
+
+  .news-loading {
+    color: #7a7060;
+    font-size: 0.9rem;
+    padding: 1rem 0;
   }
 </style>
 
 <div class="hero">
   <h1>Fossil<span>Project</span></h1>
   <p>A hub for open source discovery, news, and the developers building a freer web.</p>
+
+  <a href="https://cloud.fossilproject.org"
+     class="nav-cloud-btn">
+     Open Cloud →
+  </a>
 </div>
 
 <div class="search-section">
@@ -124,12 +255,14 @@ layout: default
 <p class="posts-header">Latest Posts</p>
 
 <ul class="post-list">
+{% raw %}
 {% for post in site.posts %}
 <li>
 <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
 <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
 </li>
 {% endfor %}
+{% endraw %}
 </ul>
 
 <div class="news-section">
