@@ -4,320 +4,313 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title }} | {{ site.title }}</title>
+
+  <!-- FAVICON -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="/favicon.ico">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --amber: #e8821a;
-      --amber-dim: #a85d10;
-      --bg: #0e0d0b;
-      --bg-raise: #161410;
-      --bg-border: #2a2620;
-      --text: #c8c0b0;
-      --text-dim: #7a7060;
-      --text-bright: #f0ece4;
-    }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+:root {
+  --amber:#e8821a;
+  --amber-dim:#a85d10;
+  --bg:#0e0d0b;
+  --bg-raise:#161410;
+  --bg-border:#2a2620;
+  --text:#c8c0b0;
+  --text-dim:#7a7060;
+  --text-bright:#f0ece4;
+}
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-weight: 300;
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
+*{box-sizing:border-box;margin:0;padding:0;}
 
-    /* HEADER */
-    header {
-    background-color: var(--bg-raise);
-    border-bottom: 1px solid var(--bg-border);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    height: 64px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    gap: 1.5rem;
-  }
+body{
+  background-color:var(--bg);
+  color:var(--text);
+  font-family:'Source Serif 4',Georgia,serif;
+  font-weight:300;
+  font-size:1.1rem;
+  line-height:1.8;
+}
 
-    .site-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: var(--text-bright);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
+/* HEADER */
+header{
+  background-color:var(--bg-raise);
+  border-bottom:1px solid var(--bg-border);
+  padding:0 2rem;
+  display:flex;
+  align-items:center;
+  height:64px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  gap:1.5rem;
+}
 
-    .site-title span {
-      color: var(--amber);
-    }
+.site-title{
+  font-family:'Playfair Display',Georgia,serif;
+  font-weight:900;
+  font-size:1.3rem;
+  color:var(--text-bright);
+  text-decoration:none;
+  letter-spacing:.02em;
+  white-space:nowrap;
+  flex-shrink:0;
+}
 
-    .nav-search {
-      flex: 1;
-      display: flex;
-      border: 1px solid var(--bg-border);
-      border-radius: 3px;
-      overflow: hidden;
-      transition: border-color 0.2s;
-      height: 36px;
-      min-width: 0;
-    }
+.site-title span{color:var(--amber);}
 
-    .nav-search:focus-within {
-      border-color: var(--amber);
-    }
+/* NAV SEARCH */
+.nav-search{
+  flex:1;
+  display:flex;
+  border:1px solid var(--bg-border);
+  border-radius:3px;
+  overflow:hidden;
+  height:36px;
+  min-width:0;
+}
 
-    .nav-search input {
-      flex: 1;
-      background: var(--bg);
-      border: none;
-      padding: 0 1rem;
-      color: var(--text);
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 0.9rem;
-      outline: none;
-      min-width: 0;
-    }
+.nav-search:focus-within{
+  border-color:var(--amber);
+}
 
-    .nav-search input::placeholder {
-      color: #4a4540;
-    }
+.nav-search input{
+  flex:1;
+  background:var(--bg);
+  border:none;
+  padding:0 1rem;
+  color:var(--text);
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:.9rem;
+  outline:none;
+}
 
-    .nav-search button {
-      background: var(--bg-raise);
-      border: none;
-      border-left: 1px solid var(--bg-border);
-      padding: 0 0.85rem;
-      color: var(--amber);
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
+.nav-search input::placeholder{color:#4a4540;}
 
-    .nav-search button:hover {
-      background: var(--amber);
-      color: var(--bg);
-    }
+.nav-search button{
+  background:var(--bg-raise);
+  border:none;
+  border-left:1px solid var(--bg-border);
+  padding:0 .85rem;
+  color:var(--amber);
+  cursor:pointer;
+}
 
-    nav {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      flex-shrink: 0;
-      margin-left: auto;
-    }
+.nav-search button:hover{
+  background:var(--amber);
+  color:var(--bg);
+}
 
-    nav a {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.9rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
+/* NAVBAR */
+nav{
+  display:flex;
+  gap:1.6rem;
+  align-items:center;
+  margin-left:auto;
+}
 
-    nav a:hover {
-      color: var(--amber);
-    }
+nav a{
+  color:var(--text-dim);
+  text-decoration:none;
+  font-size:.9rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  transition:color .2s;
+}
 
-    /* MAIN CONTENT */
-    main {
-      max-width: 740px;
-      margin: 3rem auto;
-      padding: 0 1.5rem;
-    }
+nav a:hover{
+  color:var(--amber);
+}
 
-    h1, h2, h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      color: var(--text-bright);
-      line-height: 1.25;
-    }
+/* WORKSPACE BUTTON */
+.nav-workspace{
+  border:1px solid var(--bg-border);
+  background:var(--bg);
+  color:var(--amber);
+  padding:.35rem .8rem;
+  border-radius:2px;
+  transition:all .2s;
+}
 
-    h1 { font-size: 2.2rem; margin-bottom: 1rem; }
-    h2 { font-size: 1.5rem; margin: 2.5rem 0 0.75rem; }
-    h3 { font-size: 1.2rem; margin: 2rem 0 0.5rem; }
+.nav-workspace:hover{
+  background:var(--amber);
+  color:var(--bg);
+}
 
-    p { margin-bottom: 1.25rem; }
+/* MAIN */
+main{
+  max-width:740px;
+  margin:3rem auto;
+  padding:0 1.5rem;
+}
 
-    a {
-      color: var(--amber);
-      text-decoration: none;
-    }
+h1,h2,h3{
+  font-family:'Playfair Display',Georgia,serif;
+  color:var(--text-bright);
+  line-height:1.25;
+}
 
-    a:hover {
-      color: var(--text-bright);
-      text-decoration: underline;
-    }
+h1{font-size:2.2rem;margin-bottom:1rem;}
+h2{font-size:1.5rem;margin:2.5rem 0 .75rem;}
+h3{font-size:1.2rem;margin:2rem 0 .5rem;}
 
-    hr {
-      border: none;
-      border-top: 1px solid var(--bg-border);
-      margin: 2.5rem 0;
-    }
+p{margin-bottom:1.25rem;}
 
-    /* POST META */
-    .post-meta {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--bg-border);
-    }
+a{color:var(--amber);text-decoration:none;}
+a:hover{color:var(--text-bright);text-decoration:underline;}
 
-    .post-meta span {
-      color: var(--amber);
-    }
+hr{
+  border:none;
+  border-top:1px solid var(--bg-border);
+  margin:2.5rem 0;
+}
 
-    /* CODE */
-    code {
-      font-family: 'Courier New', monospace;
-      background: var(--bg-raise);
-      color: var(--amber);
-      padding: 0.15em 0.4em;
-      border-radius: 3px;
-      font-size: 0.9em;
-    }
+/* POST META */
+.post-meta{
+  font-size:.85rem;
+  color:var(--text-dim);
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  margin-bottom:2rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--bg-border);
+}
 
-    pre {
-      background: var(--bg-raise);
-      border-left: 3px solid var(--amber);
-      padding: 1.25rem;
-      overflow-x: auto;
-      margin: 1.5rem 0;
-      border-radius: 0 4px 4px 0;
-    }
+.post-meta span{color:var(--amber);}
 
-    pre code {
-      background: none;
-      padding: 0;
-      color: var(--text);
-    }
+/* CODE */
+code{
+  font-family:'Courier New',monospace;
+  background:var(--bg-raise);
+  color:var(--amber);
+  padding:.15em .4em;
+  border-radius:3px;
+  font-size:.9em;
+}
 
-    /* FOOTER */
-    footer {
-      background-color: var(--bg-raise);
-      border-top: 1px solid var(--bg-border);
-      padding: 2rem;
-      text-align: center;
-      margin-top: 5rem;
-      font-size: 0.85rem;
-      color: var(--text-dim);
-    }
+pre{
+  background:var(--bg-raise);
+  border-left:3px solid var(--amber);
+  padding:1.25rem;
+  overflow-x:auto;
+  margin:1.5rem 0;
+  border-radius:0 4px 4px 0;
+}
 
-    footer a {
-      color: var(--amber-dim);
-    }
+pre code{
+  background:none;
+  padding:0;
+  color:var(--text);
+}
 
-    footer a:hover {
-      color: var(--amber);
-    }
+/* FOOTER */
+footer{
+  background-color:var(--bg-raise);
+  border-top:1px solid var(--bg-border);
+  padding:2rem;
+  text-align:center;
+  margin-top:5rem;
+  font-size:.85rem;
+  color:var(--text-dim);
+}
 
-    .footer-divider {
-      margin: 0 0.75rem;
-      color: var(--bg-border);
-    }
+footer a{color:var(--amber-dim);}
+footer a:hover{color:var(--amber);}
 
-    /* RESPONSIVE */
-    @media (max-width: 600px) {
-      header {
-        padding: 0 1rem;
-        gap: 0.75rem;
-      }
+.footer-divider{
+  margin:0 .75rem;
+  color:var(--bg-border);
+}
 
-      nav {
-         display: flex;
-         gap: 2rem;
-         align-items: center;
-         flex-shrink: 0;
-         margin-left: auto;
-      }
-
-      nav a {
-        font-size: 0.8rem;
-      }
-    }
-  </style>
+/* MOBILE */
+@media(max-width:600px){
+  header{padding:0 1rem;gap:.75rem;}
+  nav a{font-size:.8rem;}
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <a href="{{ '/' | relative_url }}" class="site-title">Fossil<span>Project</span></a>
+<header>
+  <a href="{{ '/' | relative_url }}" class="site-title">
+    Fossil<span>Project</span>
+  </a>
 
-    {% if page.url != '/' %}
-    <form class="nav-search" action="/search" method="get">
-      <input
-        type="text"
-        name="q"
-        placeholder="Search the web..."
-        autocomplete="off">
-      <button type="submit">⌕</button>
-    </form>
-    {% endif %}
+  {% if page.url != '/' %}
+  <form class="nav-search" action="/search" method="get">
+    <input type="text" name="q" placeholder="Search the web..." autocomplete="off">
+    <button type="submit">⌕</button>
+  </form>
+  {% endif %}
 
-    <nav>
-      <a href="{{ '/about/' | relative_url }}">About</a>
-      <a href="{{ '/posts/' | relative_url }}">Posts</a>
-      <a href="{{ '/contact/' | relative_url }}">Contact</a>
-    </nav>
-  </header>
+  <nav>
+    <a href="{{ '/about/' | relative_url }}">About</a>
+    <a href="{{ '/posts/' | relative_url }}">Posts</a>
+    <a href="{{ '/contact/' | relative_url }}">Contact</a>
 
-  <main>
-    {% if page.date %}
-    <div class="post-meta">
-      <span>{{ page.date | date: "%B %d, %Y" }}</span>
-      {% if page.author %} &nbsp;·&nbsp; {{ page.author }}{% endif %}
-    </div>
-    {% endif %}
+    <!-- NEXTCLOUD LINK -->
+    <a href="https://cloud.fossilproject.org"
+       class="nav-workspace"
+       target="_blank"
+       rel="noopener">
+       Workspace
+    </a>
+  </nav>
+</header>
 
-    {{ content }}
+<main>
 
-    {% if page.date %}
-    <div class="comments-section">
-      <script src="https://giscus.app/client.js"
-          data-repo="FossilProject/FossilProjectBlog"
-          data-repo-id="R_kgDORp4yUw"
-          data-category="Announcements"
-          data-category-id="DIC_kwDORp4yU84C4txY"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="dark_dimmed"
-          data-lang="en"
-          crossorigin="anonymous"
-          async>
-      </script>
-    </div>
-    {% endif %}
-  </main>
+{% if page.date %}
+<div class="post-meta">
+  <span>{{ page.date | date: "%B %d, %Y" }}</span>
+  {% if page.author %} &nbsp;·&nbsp; {{ page.author }}{% endif %}
+</div>
+{% endif %}
+
+{{ content }}
+
+{% if page.date %}
+<div class="comments-section">
+<script src="https://giscus.app/client.js"
+data-repo="FossilProject/FossilProjectBlog"
+data-repo-id="R_kgDORp4yUw"
+data-category="Announcements"
+data-category-id="DIC_kwDORp4yU84C4txY"
+data-mapping="pathname"
+data-reactions-enabled="1"
+data-input-position="bottom"
+data-theme="dark_dimmed"
+data-lang="en"
+crossorigin="anonymous"
+async>
+</script>
+</div>
+{% endif %}
+
+</main>
 
 <footer>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem 0.75rem;">
-      <span>© {{ site.time | date: "%Y" }} {{ site.title }}</span>
-      <span class="footer-divider">|</span>
-      <span>Written by {{ site.author }}</span>
-      <span class="footer-divider">|</span>
-      <a href="mailto:support@fossilproject.org">support@fossilproject.org</a>
-      <span class="footer-divider">|</span>
-      <div>
-        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-        <script type='text/javascript'>kofiwidget2.init('Support us on Ko-fi', '#7a4010', 'S6S81WDKX3');kofiwidget2.draw();</script>
-      </div>
-    </div>
-  </footer>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.5rem .75rem;">
+<span>© {{ site.time | date: "%Y" }} {{ site.title }}</span>
+<span class="footer-divider">|</span>
+<span>Written by {{ site.author }}</span>
+<span class="footer-divider">|</span>
+<a href="mailto:support@fossilproject.org">support@fossilproject.org</a>
+<span class="footer-divider">|</span>
+<div>
+<script src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+<script>
+kofiwidget2.init('Support us on Ko-fi','#7a4010','S6S81WDKX3');
+kofiwidget2.draw();
+</script>
+</div>
+</div>
+</footer>
 
 </body>
 </html>
